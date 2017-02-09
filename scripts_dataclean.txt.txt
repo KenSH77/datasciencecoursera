@@ -1,0 +1,49 @@
+https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv
+
+download
+
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+setwd("D:/kenfile/personal/datascience/dataclean")
+download.file(fileUrl, destfile = "./data1.csv")
+dateDownloaded <- date()
+data1 <- read.table("./data1.csv", sep = ",", header = TRUE)
+
+filter 
+library(dplyr)
+a <- filter(data1, VAL == 24)
+nrow(a)
+53
+
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx"
+download.file(fileUrl, destfile = "./data2.xlsx", , mode="wb")				# change mode="wb"
+library(xlsx)
+data2 <- read.xlsx("./data2.xlsx", sheetIndex=1, startRow=18,endRow=23, header=TRUE)
+
+library(dplyr)
+
+dat<- select(data2,7:15)
+
+r <- sum(dat$Zip*dat$Ext,na.rm=T)
+36534720
+
+library(XML)
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+download.file(fileUrl, destfile = "./data3.XML")	
+doc <- xmlTreeParse("./data3.XML", useInternal=TRUE)
+
+# zipcode
+zipCodeList <- xpathApply(doc, "//zipcode", xmlValue)
+resultList <- zipCodeList[sapply(zipCodeList, function(x) x==21231)]
+length(resultList)
+# 127
+
+
+#https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv"
+download.file(fileUrl, destfile = "./data5.csv")
+
+DT <- fread("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv")
+
+system.time(  sapply(split(DT$pwgtp15,DT$SEX),mean)    ) 
+
+
