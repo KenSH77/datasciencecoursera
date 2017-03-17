@@ -1,0 +1,38 @@
+---
+title: "Week3Plotly"
+author: "Ken"
+date: "2017年3月18日"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This R Marketdown file is created By Ken, this slide contains 2 parts
+
+```{r}
+library(UsingR)
+library(plotly)
+dateOfDocCreate <- c("03/18/2017")
+datesOfCreation <- as.Date(dateOfDocCreate, "%m/%d/%Y")
+```
+
+## The document creation date
+This document creation date is: 
+```{r}
+datesOfCreation
+```
+
+## The plot page
+
+```{r}
+# plot parent/child inside plotly graph
+
+plot_ly(alpha=0.6, name="Child") %>% add_histogram(x=Galton$parent, text='Parent', name="Parent") %>% add_histogram(x=Galton$child, text='Child') %>% layout(barmode="overlay")
+
+
+```
+
